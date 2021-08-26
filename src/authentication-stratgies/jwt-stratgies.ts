@@ -8,6 +8,7 @@ import {ParsedQs} from 'qs';
 import {TokenServiceBindings} from '../keys';
 import {JWTService} from '../services/jwt-service';
 
+
 export class JWTStrategy implements AuthenticationStrategy {
   name = 'jwt';
   @inject(TokenServiceBindings.TOKEN_SERVICE)
@@ -17,9 +18,9 @@ export class JWTStrategy implements AuthenticationStrategy {
 //     // eslint-disable-next-line @typescript-eslint/no-explicit-any
 //     request: Request<ParamsDictionary, any, any, ParsedQs>,
 // ): Promise<UserProfile | RedirectRoute | undefined> {
- 
+
 async authenticate(request: Request): Promise<UserProfile | undefined> {
-  
+
     const token: string = this.extractCredentials(request);
     const userProfile = await this.jwtService.verifyToken(token);
     return Promise.resolve(userProfile);
